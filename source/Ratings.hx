@@ -9,7 +9,9 @@ class Ratings
 			ranking = "BotPlay";
 
         if (PlayState.misses == 0 && PlayState.bads == 0 && PlayState.shits == 0 && PlayState.goods == 0) // Marvelous (SICK) Full Combo
-            ranking = "(MFC)";
+            ranking = "(PERFECT)";
+        else if (PlayState.misses == 0 && PlayState.bads == 0 && PlayState.shits == 0 && PlayState.goods < 10) // SDG
+            ranking = "(SDG)";
         else if (PlayState.misses == 0 && PlayState.bads == 0 && PlayState.shits == 0 && PlayState.goods >= 1) // Good Full Combo (Nothing but Goods & Sicks)
             ranking = "(GFC)";
         else if (PlayState.misses == 0) // Regular FC
@@ -17,27 +19,19 @@ class Ratings
         else if (PlayState.misses < 10) // Single Digit Combo Breaks
             ranking = "(SDCB)";
         else
-            ranking = "(Clear)";
+            ranking = "";
 
         // WIFE TIME :)))) (based on Wife3)
 
         var wifeConditions:Array<Bool> = [
-            accuracy >= 99.9935, // AAAAA
-            accuracy >= 99.980, // AAAA:
-            accuracy >= 99.970, // AAAA.
-            accuracy >= 99.955, // AAAA
-            accuracy >= 99.90, // AAA:
-            accuracy >= 99.80, // AAA.
-            accuracy >= 99.70, // AAA
-            accuracy >= 99, // AA:
-            accuracy >= 96.50, // AA.
-            accuracy >= 93, // AA
-            accuracy >= 90, // A:
-            accuracy >= 85, // A.
-            accuracy >= 80, // A
-            accuracy >= 70, // B
-            accuracy >= 60, // C
-            accuracy < 60 // D
+            accuracy >= 99.999,
+            accuracy >= 97.5,
+            accuracy >= 95,
+            accuracy >= 90,
+            accuracy >= 80,
+            accuracy >= 70,
+            accuracy >= 60,
+            accuracy < 60
         ];
 
         for(i in 0...wifeConditions.length)
@@ -48,36 +42,20 @@ class Ratings
                 switch(i)
                 {
                     case 0:
-                        ranking += " AAAAA";
+                        ranking += " SSSS";
                     case 1:
-                        ranking += " AAAA:";
+                        ranking += " SSS";
                     case 2:
-                        ranking += " AAAA.";
+                        ranking += " SS";
                     case 3:
-                        ranking += " AAAA";
+                        ranking += " S";
                     case 4:
-                        ranking += " AAA:";
-                    case 5:
-                        ranking += " AAA.";
-                    case 6:
-                        ranking += " AAA";
-                    case 7:
-                        ranking += " AA:";
-                    case 8:
-                        ranking += " AA.";
-                    case 9:
-                        ranking += " AA";
-                    case 10:
-                        ranking += " A:";
-                    case 11:
-                        ranking += " A.";
-                    case 12:
                         ranking += " A";
-                    case 13:
+                    case 5:
                         ranking += " B";
-                    case 14:
+                    case 6:
                         ranking += " C";
-                    case 15:
+                    case 7:
                         ranking += " D";
                 }
                 break;
@@ -87,7 +65,7 @@ class Ratings
         if (accuracy == 0)
             ranking = "N/A";
 		else if(FlxG.save.data.botplay && !PlayState.loadRep)
-			ranking = "BotPlay";
+			ranking = "UNRANKED";
 
         return ranking;
     }
